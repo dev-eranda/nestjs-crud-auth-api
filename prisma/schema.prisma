@@ -25,7 +25,7 @@ model User {
   lastName  String?
 }
 
-model meals {
+model Meals {
   id        Int      @id @default(autoincrement())
   createdAT DateTime @default(now())
   updatedAt DateTime @default(now())
