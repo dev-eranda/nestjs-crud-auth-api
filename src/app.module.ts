@@ -6,4 +6,4 @@ import { MealsModule } from './meals/meals.module';
 @Module({
   imports: [AuthModule, UserModule, MealsModule],
 })
-export class AppModule {}
+export class AppModule { }

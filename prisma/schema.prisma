@@ -12,3 +12,25 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAT DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  email String
+  hash  String
+
+  firstName String?
+  lastName  String?
+}
+
+model meals {
+  id        Int      @id @default(autoincrement())
+  createdAT DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  title       String
+  description String?
+  link        String
+}
