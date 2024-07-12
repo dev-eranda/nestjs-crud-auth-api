@@ -13,16 +13,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Users {
   id        Int      @id @default(autoincrement())
   createdAT DateTime @default(now())
   updatedAt DateTime @default(now())
 
-  email String
+  email String @unique
   hash  String
 
   firstName String?
   lastName  String?
+
+  Meals Meals[]
 }
 
 model Meals {
@@ -33,4 +35,7 @@ model Meals {
   title       String
   description String?
   link        String
+
+  userId Int
+  user   Users @relation(fields: [userId], references: [id])
 }
