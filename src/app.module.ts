@@ -11,6 +11,7 @@ import { ConfigModule } from '@nestjs/config'
     AuthModule,
     UserModule,
     MealsModule,
-    PrismaModule],
+    PrismaModule,
+  ],
 })
 export class AppModule { }
