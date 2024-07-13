@@ -8,11 +8,19 @@ import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 export class AuthService {
     constructor(private prismaService: PrismaService) { }
     async signup(dto: AuthDto) {
-
-        // generate the password hash
-        const hash = await argon.hash(dto.password);
-
         try {
+            // find the user by email
+            const userByEmail = await this.prismaService.users.findUnique({
+                where: {
+                    email: dto.email
+                }
+            });
+
+            if (userByEmail) throw new ForbiddenException('Credentials taken')
+
+            // generate the password hash
+            const hash = await argon.hash(dto.password);
+
             // save user to db
             const user = await this.prismaService.users.create({
                 data: {
