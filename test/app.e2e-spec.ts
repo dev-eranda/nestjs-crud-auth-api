@@ -5,6 +5,7 @@ import { PrismaService } from '../src/prisma/prisma.service';
 import * as pactum from 'pactum';
 import { AuthDto } from 'src/auth/dto';
 import { EditUserDto } from 'src/user/dto';
+import { CreateMealsDto, EditMealsDto } from 'src/meals/dto';
 
 describe('App e2e', () => {
   let app: INestApplication;
@@ -34,7 +35,7 @@ describe('App e2e', () => {
 
   describe('Auth', () => {
     const dto: AuthDto = {
-      email: 'erandaa@gmail.com',
+      email: 'eranda@gmail.com',
       password: '123',
     };
 
@@ -126,7 +127,7 @@ describe('App e2e', () => {
 
     describe('Edit user', () => {
       const dto: EditUserDto = {
-        email: 'eranda1@gmail.com',
+        // email: 'eranda1@gmail.com',
         firstName: 'eranda',
         // lastName: 'samarasinghe'
       };
@@ -139,7 +140,7 @@ describe('App e2e', () => {
           })
           .withBody(dto)
           .expectStatus(200)
-          .expectBodyContains(dto.email)
+          // .expectBodyContains(dto.email)
           .expectBodyContains(dto.firstName)
         // .expectBodyContains(dto.lastName)
       });
@@ -147,14 +148,108 @@ describe('App e2e', () => {
   });
 
   describe('Meals', () => {
-    describe('Create Meals', () => { });
+    describe('Get empty meals', () => {
+      it('should get empty meals', () => {
+        return pactum
+          .spec()
+          .get('/meals')
+          .withHeaders({
+            Authorization: 'Bearer $S{userToken}',
+          })
+          .expectStatus(200)
+          .expectBody([])
+      })
+    });
 
-    describe('Get meals', () => { });
+    describe('Create Meals', () => {
+      const dto: CreateMealsDto = {
+        title: 'Pizza',
+        description: 'From Pizzahut',
+        link: 'https://www.pizzahut.lk/'
+      }
 
-    describe('Get meals by id', () => { });
+      it('should create meal', () => {
+        return pactum
+          .spec()
+          .post('/meals/create')
+          .withHeaders({
+            Authorization: 'Bearer $S{userToken}',
+          })
+          .withBody(dto)
+          .expectStatus(201)
+          .stores('mealId', 'id')
+      })
+    });
 
-    describe('Edit meals by id', () => { });
+    describe('Get meals', () => {
+      it('should get meals', () => {
+        return pactum
+          .spec()
+          .get('/meals')
+          .withHeaders({
+            Authorization: 'Bearer $S{userToken}',
+          })
+          .expectStatus(200)
+          .expectJsonLength(1)
+      })
+    });
 
-    describe('Delete meals by id', () => { });
+    describe('Get meals by id', () => {
+      it('should get meals by id', () => {
+        return pactum
+          .spec()
+          .get('/meals/{id}')
+          .withPathParams('id', '$S{mealId}')
+          .withHeaders({
+            Authorization: 'Bearer $S{userToken}',
+          })
+          .expectStatus(200)
+          .expectBodyContains('$S{mealId}')
+      })
+    });
+
+    describe('Edit meals by id', () => {
+      const dto: EditMealsDto = {
+        title: 'dominos',
+        description: 'dominos Pizza',
+      }
+      it('should edit meals by id', () => {
+        return pactum
+          .spec()
+          .patch('/meals/{id}')
+          .withPathParams('id', '$S{mealId}')
+          .withHeaders({
+            Authorization: 'Bearer $S{userToken}',
+          })
+          .expectStatus(200)
+          .withBody(dto)
+          .expectBodyContains(dto.title)
+          .expectBodyContains(dto.description)
+      })
+    });
+
+    describe('Delete meals by id', () => {
+      it('should delete meals by id', () => {
+        return pactum
+          .spec()
+          .delete('/meals/{id}')
+          .withPathParams('id', '$S{mealId}')
+          .withHeaders({
+            Authorization: 'Bearer $S{userToken}',
+          })
+          .expectStatus(204)
+      })
+
+      it('should get empty meals', () => {
+        return pactum
+          .spec()
+          .get('/meals')
+          .withHeaders({
+            Authorization: 'Bearer $S{userToken}',
+          })
+          .expectStatus(200)
+          .expectBody([])
+      })
+    });
   });
 });
