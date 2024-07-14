@@ -132,16 +132,18 @@ describe('App e2e', () => {
         // lastName: 'samarasinghe'
       };
       it('should edit user', () => {
-        return pactum
-          .spec()
-          .patch('/user/edit')
-          .withHeaders({
-            Authorization: 'Bearer $S{userToken}',
-          })
-          .withBody(dto)
-          .expectStatus(200)
-          // .expectBodyContains(dto.email)
-          .expectBodyContains(dto.firstName)
+        return (
+          pactum
+            .spec()
+            .patch('/user/edit')
+            .withHeaders({
+              Authorization: 'Bearer $S{userToken}',
+            })
+            .withBody(dto)
+            .expectStatus(200)
+            // .expectBodyContains(dto.email)
+            .expectBodyContains(dto.firstName)
+        );
         // .expectBodyContains(dto.lastName)
       });
     });
@@ -157,16 +159,16 @@ describe('App e2e', () => {
             Authorization: 'Bearer $S{userToken}',
           })
           .expectStatus(200)
-          .expectBody([])
-      })
+          .expectBody([]);
+      });
     });
 
     describe('Create Meals', () => {
       const dto: CreateMealsDto = {
         title: 'Pizza',
         description: 'From Pizzahut',
-        link: 'https://www.pizzahut.lk/'
-      }
+        link: 'https://www.pizzahut.lk/',
+      };
 
       it('should create meal', () => {
         return pactum
@@ -177,8 +179,8 @@ describe('App e2e', () => {
           })
           .withBody(dto)
           .expectStatus(201)
-          .stores('mealId', 'id')
-      })
+          .stores('mealId', 'id');
+      });
     });
 
     describe('Get meals', () => {
@@ -190,8 +192,8 @@ describe('App e2e', () => {
             Authorization: 'Bearer $S{userToken}',
           })
           .expectStatus(200)
-          .expectJsonLength(1)
-      })
+          .expectJsonLength(1);
+      });
     });
 
     describe('Get meals by id', () => {
@@ -204,15 +206,15 @@ describe('App e2e', () => {
             Authorization: 'Bearer $S{userToken}',
           })
           .expectStatus(200)
-          .expectBodyContains('$S{mealId}')
-      })
+          .expectBodyContains('$S{mealId}');
+      });
     });
 
     describe('Edit meals by id', () => {
       const dto: EditMealsDto = {
         title: 'dominos',
         description: 'dominos Pizza',
-      }
+      };
       it('should edit meals by id', () => {
         return pactum
           .spec()
@@ -224,8 +226,8 @@ describe('App e2e', () => {
           .expectStatus(200)
           .withBody(dto)
           .expectBodyContains(dto.title)
-          .expectBodyContains(dto.description)
-      })
+          .expectBodyContains(dto.description);
+      });
     });
 
     describe('Delete meals by id', () => {
@@ -237,8 +239,8 @@ describe('App e2e', () => {
           .withHeaders({
             Authorization: 'Bearer $S{userToken}',
           })
-          .expectStatus(204)
-      })
+          .expectStatus(204);
+      });
 
       it('should get empty meals', () => {
         return pactum
@@ -248,8 +250,8 @@ describe('App e2e', () => {
             Authorization: 'Bearer $S{userToken}',
           })
           .expectStatus(200)
-          .expectBody([])
-      })
+          .expectBody([]);
+      });
     });
   });
 });
