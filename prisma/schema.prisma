@@ -34,7 +34,7 @@ model Meals {
 
   title       String
   description String?
-  link        String
+  image_url   String?
 
   userId Int
   user   Users @relation(fields: [userId], references: [id])

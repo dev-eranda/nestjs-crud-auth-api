@@ -4,15 +4,15 @@ import { CreateMealsDto, EditMealsDto } from './dto';
 
 @Injectable()
 export class MealsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async createMeals(userId: number, dto: CreateMealsDto) {
     try {
       const meals = await this.prisma.meals.create({
         data: {
           userId,
-          ...dto,
-        },
+          ...dto
+        }
       });
 
       return meals;

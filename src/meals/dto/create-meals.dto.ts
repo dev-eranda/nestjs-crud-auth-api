@@ -10,6 +10,6 @@ export class CreateMealsDto {
   description?: string;
 
   @IsString()
-  @IsNotEmpty()
-  link: string;
+  @IsOptional()
+  image_url?: string;
 }

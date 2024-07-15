@@ -35,8 +35,8 @@ describe('App e2e', () => {
 
   describe('Auth', () => {
     const dto: AuthDto = {
-      email: 'eranda@gmail.com',
-      password: '123',
+      email: 'alex.smith@example.com',
+      password: 'P@ssw0rd123!',
     };
 
     describe('Signup', () => {
@@ -127,9 +127,8 @@ describe('App e2e', () => {
 
     describe('Edit user', () => {
       const dto: EditUserDto = {
-        // email: 'eranda1@gmail.com',
-        firstName: 'eranda',
-        // lastName: 'samarasinghe'
+        firstName: 'Alex',
+        lastName: 'Smith'
       };
       it('should edit user', () => {
         return (
@@ -141,10 +140,8 @@ describe('App e2e', () => {
             })
             .withBody(dto)
             .expectStatus(200)
-            // .expectBodyContains(dto.email)
             .expectBodyContains(dto.firstName)
         );
-        // .expectBodyContains(dto.lastName)
       });
     });
   });
@@ -165,9 +162,9 @@ describe('App e2e', () => {
 
     describe('Create Meals', () => {
       const dto: CreateMealsDto = {
-        title: 'Pizza',
-        description: 'From Pizzahut',
-        link: 'https://www.pizzahut.lk/',
+        title: 'Burger',
+        description: 'Burger',
+        image_url: 'https://images.unsplash.com/photo-1521305916504-4a1121188589?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YnVyZ2VyfGVufDB8fDB8fHww',
       };
 
       it('should create meal', () => {
@@ -212,8 +209,8 @@ describe('App e2e', () => {
 
     describe('Edit meals by id', () => {
       const dto: EditMealsDto = {
-        title: 'dominos',
-        description: 'dominos Pizza',
+        title: 'pizza',
+        description: 'Pizza',
       };
       it('should edit meals by id', () => {
         return pactum

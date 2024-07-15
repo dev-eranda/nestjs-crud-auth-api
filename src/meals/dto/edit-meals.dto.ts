@@ -11,5 +11,5 @@ export class EditMealsDto {
 
   @IsString()
   @IsOptional()
-  link?: string;
+  image_url?: string;
 }
