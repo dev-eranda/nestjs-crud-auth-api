@@ -1,4 +1,4 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { ForbiddenException, HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateMealsDto, EditMealsDto } from './dto';
 
@@ -44,6 +44,10 @@ export class MealsService {
         },
       });
 
+      if (!meals) {
+        throw new HttpException('Meal not found', HttpStatus.NOT_FOUND);
+      }
+
       return meals;
     } catch (error) {
       throw error;
@@ -59,9 +63,13 @@ export class MealsService {
         },
       });
 
-      // check if user owner of meals
-      if (!meals || meals.userId !== userId) {
-        throw new ForbiddenException('Acces to resource denied');
+      // check if user is the owner of the meal
+      if (!meals) {
+        throw new NotFoundException('Meal not found');
+      }
+
+      if (meals.userId !== userId) {
+        throw new ForbiddenException('Access to resource denied');
       }
 
       // modify
@@ -87,17 +95,25 @@ export class MealsService {
         },
       });
 
-      // check if user owner of meals
-      if (!meals || meals.userId !== userId) {
-        throw new ForbiddenException('Acces to resource denied');
+      // check if user is the owner of the meal
+      if (!meals) {
+        throw new NotFoundException('Meal not found');
+      }
+
+      if (meals.userId !== userId) {
+        throw new ForbiddenException('Access to resource denied');
       }
 
       // delete
-      return this.prisma.meals.delete({
+      await this.prisma.meals.delete({
         where: {
           id: mealId,
         },
       });
+
+      // return response message
+      return { message: 'Meal successfully deleted' };
+
     } catch (error) {
       throw error;
     }

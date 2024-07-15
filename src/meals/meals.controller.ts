@@ -16,7 +16,7 @@ import { CreateMealsDto, EditMealsDto } from './dto';
 
 @Controller('meals')
 export class MealsController {
-  constructor(private mealService: MealsService) {}
+  constructor(private mealService: MealsService) { }
 
   @Post('create')
   createMeals(@GetUser('sub') userId: number, @Body() dto: CreateMealsDto) {
@@ -45,7 +45,7 @@ export class MealsController {
     return this.mealService.editMealById(userId, mealId, dto);
   }
 
-  @HttpCode(HttpStatus.NO_CONTENT)
+  // @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
   deleteMealById(
     @GetUser('sub') userId: number,
