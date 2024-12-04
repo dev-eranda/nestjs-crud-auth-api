@@ -1,4 +1,4 @@
-# .NET Core Swagger API
+# NestJS CRUD API
 
 **Developed By:** Eranda Samarasinghe
 <hr />
