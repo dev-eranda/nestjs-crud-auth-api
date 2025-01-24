@@ -35,7 +35,9 @@ Core technologies used:
 3. Start watch mode:
    ```sh
    yarn run start:dev 
-
+   
+  - **Open [http://localhost:5432](http://localhost:5432) with your browser to see the result.**
+    
 ## Test
 1. Clone repository:
    ```sh
@@ -44,5 +46,3 @@ Core technologies used:
 2. Start development server:
    ```sh
    yarn run test:e2e
-   
-  - **Open [http://localhost:5432](http://localhost:5432) with your browser to see the result.**
