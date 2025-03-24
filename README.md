@@ -1,9 +1,9 @@
 # NestJS API
 
-**Developed By:** Eranda Samarasinghe
+**Developed by:** Eranda Samarasinghe
 <hr />
 
-## Project Backgroud and Overview
+## Project Background and Overview
 This repository contains back-end development work where built a secure authentication application using NestJS. This project helped me understand best practices in API security, modular architecture, and effective database management, while integrating advanced testing techniques
 <hr />
 
