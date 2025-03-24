@@ -1,26 +1,26 @@
-# NestJS CRUD API
+# NestJS API
 
 **Developed By:** Eranda Samarasinghe
 <hr />
 
 ## Project Backgroud and Overview
-Focused on mastering back-end development, I built a secure authentication application using NestJS. This project helped me understand best practices in API security, modular architecture, and effective database management while integrating advanced testing techniques.
+This repository contains back-end development work where built a secure authentication application using NestJS. This project helped me understand best practices in API security, modular architecture, and effective database management, while integrating advanced testing techniques
 <hr />
 
 ## Project Goals
 The main objectives of this application are to:
 
-1. Implemented JWT-based authentication for securing API endpoints and managing user sessions.
-2. Developed a modular codebase using dependency injection and decorators in NestJS.
-3  Utilized PostgreSQL within a Docker environment to ensure efficient database management and deployment.
-4. Enabled CRUD operations to facilitate resource management within the application.
-5. Integrated end-to-end (e2e) testing using Pact to ensure the integrity and reliability of the application.
+1. Implemented JWT-based authentication for securing API endpoints and managing user sessions
+2. Developed a modular codebase using dependency injection and decorators in NestJS
+3  Utilized PostgreSQL within a Docker environment to ensure efficient database management and deployment
+4. Enabled CRUD operations to facilitate resource management within the application
+5. Integrated end-to-end (e2e) testing using Pact to ensure the integrity and reliability of the application
 <hr />
 
 ## Technical Details
 Core technologies used: 
 
-- **NestJS, PostgreeSQL, JWT Authentication**
+- **NestJS, PostgreSQL, JWT Authentication**
 <hr />
 
 ## Installation
